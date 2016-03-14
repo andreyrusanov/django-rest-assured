@@ -62,6 +62,3 @@ class TestCreateTestCase(TestCase):
         assert isinstance(created, Stuff)
         assert response.data['name'] == created.name
         assert response.data['url']
-
-    def test_nested_create(self):
-        pass
