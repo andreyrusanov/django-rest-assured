@@ -10,7 +10,7 @@ class TestCreateTestCase(TestCase):
         class MockCreateTestCase(CreateAPITestCaseMixin, mocks.MockTestCase):
             base_name = kwargs.pop('base_name', 'stuff')
             factory_class = mocks.StuffFactory
-            create_data = {"name": "moar stuff"}
+            create_data = {"name": "moar stuff", "nested": {"key": "value"}}
 
         self.case_class = MockCreateTestCase
 
@@ -62,3 +62,6 @@ class TestCreateTestCase(TestCase):
         assert isinstance(created, Stuff)
         assert response.data['name'] == created.name
         assert response.data['url']
+
+    def test_nested_create(self):
+        pass
