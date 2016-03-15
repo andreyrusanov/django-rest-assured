@@ -216,7 +216,7 @@ class CreateAPITestCaseMixin(object):
     #: The name of the field in the response data for looking up the created object in DB.
     response_lookup_field = 'id'
     # set specific format for request data. Available values are multipart and json
-    format = 'json'
+    create_request_format = 'json'
 
     def get_create_data(self):
         """Return the data used for the create request.
@@ -247,7 +247,7 @@ class CreateAPITestCaseMixin(object):
         if data is None:
             data = self.get_create_data()
 
-        return self.client.post(self.get_create_url(), data or {}, format=self.format, **kwargs)
+        return self.client.post(self.get_create_url(), data or {}, format=self.create_request_format, **kwargs)
 
     def get_lookup_from_response(self, data):
         """Return value for looking up the created object in DB.
@@ -353,7 +353,7 @@ class UpdateAPITestCaseMixin(object):
     #: The name of the field in the response data for looking up the created object in DB.
     relationship_lookup_field = 'id'
     # set specific format for request data. Available values are multipart and json
-    format = 'json'
+    update_request_format = 'json'
 
     def get_update_url(self):
         """Return the update endpoint url.
@@ -387,7 +387,7 @@ class UpdateAPITestCaseMixin(object):
         if use_patch is None:
             use_patch = self.use_patch
 
-        kwargs['format'] = self.format
+        kwargs['format'] = self.update_request_format
 
         return self.client.patch(*args, **kwargs) if use_patch else self.client.put(*args, **kwargs)
 
